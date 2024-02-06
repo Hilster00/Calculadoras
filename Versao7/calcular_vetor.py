@@ -149,13 +149,16 @@ def calcular(operacao=[None],radiano=True):
     if len(operacao) == 0:
         raise ValueError("ERRO")
     resultado=list()
-    
+
+    #calcula primeiro as partes mais internas
     for i in operacao:
         temp=i
         if type(i)==list:
             temp=calcular(i,radiano)
         resultado.append(temp)
+        
     temp=[]
+    #valores proprios
     for i in resultado:
         if i == "π":
             temp.append(math.pi)
@@ -163,18 +166,34 @@ def calcular(operacao=[None],radiano=True):
             temp.append(math.e)
         else:
             temp.append(i)
+            
     resultado=temp
     temp=[resultado[0]]
-    for i in resultado[1:]:
-        if type(temp[-1]) in [int,float] and type(i) in [int,float]:
+    pular=False
+    for i,c in enumerate(resultado[1:]):
+        #pular iteracao
+        if pular == True:
+            pular=False
+            continue
+        if type(temp[-1]) in [int,float] and type(c) in [int,float]:
             temp.append("*")
-        elif type(i) == type(temp[-1]) == str:
-            if temp[-1] in "-+" and i in "-+":
-                temp[-1]="+" if temp[-1] == i else "-"
+        elif type(c) == type(temp[-1]) == str:
+            if temp[-1] in "-+" and c in "-+":
+                temp[-1]="+" if temp[-1] == c else "-"
                 continue
+            elif c in "-+" and len(resultado[1:])>=i+1:
+                if type(resultado[i+2]) in [int,float]:
+                    #adiciona o sinal no próximo valor
+                    m=-1 if c == "-" else 1
+                    m*=resultado[i+2]
+                    temp+=[m]
+                    #como o valor já está na lista, pula a próxima iteração
+                    pular=True
+                    continue
+
             else:
                 raise ValueError("Erro")
-        temp.append(i)
+        temp.append(c)
 
 
     #chama as funções para resolver seguindo a ordem de precedencia
@@ -196,4 +215,5 @@ if __name__=="__main__":
     print(calcular(["sen'",[1]],False))
     print(calcular(["sen'",[1]]))
     print(calcular(["fat",[6]]))
-    
+    print(calcular([9,"*","-",9]))
+    print(calcular([9,"*","-",9,"/","+",9]))

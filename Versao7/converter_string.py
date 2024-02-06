@@ -62,15 +62,17 @@ def converter_string(string,recursao=False):
             if string[i] in "()":
                 parenteses+=1 if string[i] == "(" else -1
                 if parenteses == 0:
+                    retorno+=string[i]
+                    i+=1
                     return retorno,i
                 retorno+=string[i]
                 i+=1
                 continue
             return [retorno,i]
         retorno+=string[i]
-    
-        
         i+=1
+
+        
     if recursao:
         return [retorno,i]
     return retorno
@@ -82,7 +84,7 @@ if __name__ == "__main__":
     print(converter_string("sen90+sen-90"))
     print(converter_string("cos90/cos90"))
     print(converter_string("cos(90)/cos(90)"))
-    print(converter_string("sen((90))"))
+    print(converter_string("sen((90))+9"))
     print(converter_string("sen'9"))
     print(converter_string("fat9"))
 

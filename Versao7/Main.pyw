@@ -24,7 +24,7 @@ teclas_invertidas={
 }
 posicao_telcas_invertidas=[]
 
-nao_implementado=["%"]
+nao_implementado=[]
 q_linhas=5
 q_colunas=7
 class Calculadora(QWidget):
@@ -36,7 +36,7 @@ class Calculadora(QWidget):
         self.setFixedSize(20+q_colunas*50,70+q_linhas*50)
         icon = QIcon("icone.png")
         self.setWindowIcon(icon)
-    
+        
         #resultado
         self.__resultado = caixa_texto(self)
         self.__resultado.setGeometry(10,10,50*q_colunas,40)

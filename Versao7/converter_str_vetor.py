@@ -47,21 +47,31 @@ def  criar_lista(string):
             #nao adiciona caracteres vazios
             if cadeia != "":
                 retorno.append(cadeia)
-                cadeia=""
-                    
+                if string[i] == "%":
+                    if len(retorno)>2:
+                        #porcentagem sobre outro valor, deve multiplicar pelo valor anterior a porcentagem
+                        retorno+=["/","100","*",retorno[-3]]
+                    else:
+                        #porcentagem é só dividir por 100
+                        retorno+=["/","100"]
+                
+                cadeia=""     
             
             if string[i] in caracteres:
                 operacao+=string[i]
                 if operacao in operacoes:
+                    
+                    #operações que tem o inverso
                     if operacao in ["sen","cos","tan"]:
                         if string[i+1] == "'":
                             i+=1
                             operacao+=string[i]
-                            print(operacao)
                     retorno.append(operacao)
                     operacao=""
             else:
-                retorno.append(string[i])
+                if string[i] != "%":
+                    retorno.append(string[i])
+                    
         else:
             cadeia+=string[i]
    
@@ -70,11 +80,16 @@ def  criar_lista(string):
         
     if cadeia != "":
         retorno.append(cadeia)
-        
+
     return retorno
+    
     
     
 if __name__=="__main__":
     print(conversor("1+2.5+(1+(12*3)+2)+2+inf"))
     print(conversor("sen'90"))
     print(conversor("fat6"))
+    print(conversor("9*9%"))
+    print(conversor("9%"))
+    print(conversor("1+9%"))
+    print(conversor("9+9*(9*9%)"))
