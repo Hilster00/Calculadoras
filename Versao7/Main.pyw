@@ -37,7 +37,7 @@ class Calculadora(QMainWindow):
         super().__init__(parent)
         self.setWindowTitle("Calculadora 7")
         self.setFixedSize(20 + q_colunas * 50, 90 + q_linhas * 50)
-        icon = QIcon("icone.png")
+        icon = QIcon("icone.ico")
         self.setWindowIcon(icon)
 
         #resultado
