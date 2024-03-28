@@ -24,11 +24,13 @@ def  criar_lista(string):
     #laço para iterar sobre os caracteres da string
     i=0
     while i < len(string):
-        
         #linsta interna
         if string[i] in "()":
             #cria uma sub-lista para parenteses internos
             if string[i] == "(":
+                if cadeia != "":
+                    retorno.append(cadeia)
+                    cadeia=""
                 temp=criar_lista(string[i+1:])
                 #quantidade de caracteres percorridos 
                 i+=temp[1]
@@ -38,7 +40,7 @@ def  criar_lista(string):
             elif string[i] == ")":
                 if cadeia != "":
                     retorno.append(cadeia)
-                #sub-lista e indices percorridos    
+                #sub-lista e indices percorridos  
                 return retorno,i+1
             
         elif string[i] in "+-*/^!#r%sencomfatlgπ'" :
@@ -93,3 +95,4 @@ if __name__=="__main__":
     print(conversor("9%"))
     print(conversor("1+9%"))
     print(conversor("9+9*(9*9%)"))
+    print(conversor("6/2(2+1)"))

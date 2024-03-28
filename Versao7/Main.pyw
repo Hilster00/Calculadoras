@@ -14,6 +14,13 @@ teclas=[
     ",",    "0",    "=",   "(",  ")",    "√"
 
 ]
+teclas_especiais = [
+"INV",  "RAD",  "%",
+"sen",  "cos",  "tan",
+"ln",   "log",  "!",
+"π",    "e",    "^",
+ "(",  ")",    "√"
+]
 teclas_invertidas={
     "sen":"sen'",
     "cos":"cos'",
@@ -46,13 +53,16 @@ class Calculadora(QWidget):
 
         self.__radiano=True
         self.__inv=False
+        self.__calculadora_completa=True
         
         #construção de botões
         j=0
         k=0
 
+        self.__lista_botoes={}
         for i,operador in enumerate(teclas):
                 self.__botoes[i].setText(f'{operador}')
+                self.__lista_botoes[operador] = (self.__botoes[i],i)
                 
                 #definir função
                 if operador == "=":
@@ -65,7 +75,7 @@ class Calculadora(QWidget):
                     self.__botoes[i].clicked.connect(self.delet)
                     
                 elif operador == "L":
-                    self.__botoes[i].clicked.connect(partial(self.limpar_proximo, i))
+                    self.__botoes[i].clicked.connect(partial(self.calculadora_especial, i))
 
                 elif operador == "RAD":
                     self.__botoes[i].clicked.connect(partial(self.alternar, i))
@@ -93,16 +103,23 @@ class Calculadora(QWidget):
                 #vai para a linha de baixo caso tenha ocupado todas colunas
                     j=0
                     k+=1
+        self.calculadora_especial(self.__lista_botoes["L"][1])
     def invertida(self,operador):
         if self.__inv:
             self.clique(teclas_invertidas[operador])
         else:
             self.clique(operador)
             
-    def limpar_proximo(self,posicao):
-        self.__resultado.limpar_ativo=not self.__resultado.limpar_ativo
-        cor="color: black;" if self.__resultado.limpar_ativo else "color: red;"
+    def calculadora_especial(self,posicao):
+        self.__calculadora_completa=not  self.__calculadora_completa
+        cor="color: black;" if  self.__calculadora_completa else "color: red;"
         self.__botoes[posicao].setStyleSheet(cor)
+        for tecla in teclas_especiais:
+            self.__lista_botoes[tecla][0].setVisible(self.__calculadora_completa)
+        temp = 7 if self.__calculadora_completa else 4
+        self.setFixedSize(20+temp*50,70+q_linhas*50)
+        self.__resultado.setGeometry(10,10,50*temp,40)
+        
        
     def inv(self,posicao):
         self.__inv=not(self.__inv)

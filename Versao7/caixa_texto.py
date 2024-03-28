@@ -19,7 +19,7 @@ tabela_troca={
 class caixa_texto(QLineEdit):
     def __init__(self, parent=None):
         super().__init__(parent)
-
+        
         #cor
         self.__cor = QColor()
         self.__cor.setRgb(0, 0, 0)

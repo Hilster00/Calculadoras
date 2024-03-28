@@ -217,3 +217,4 @@ if __name__=="__main__":
     print(calcular(["fat",[6]]))
     print(calcular([9,"*","-",9]))
     print(calcular([9,"*","-",9,"/","+",9]))
+    print(calcular([6,"/",2,[2,"+",1]]))
