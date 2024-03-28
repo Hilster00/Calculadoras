@@ -23,7 +23,6 @@ def calcular_string(string,radianos):
         r=r.replace("(inf)","inf")
         r=converter_str_vetor.conversor(r)
         r=limpar_vetor.limpagem(r)
-       
         r=calcular_vetor.calcular(r,radianos)
         return str(r)
     except:

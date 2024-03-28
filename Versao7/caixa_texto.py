@@ -130,10 +130,10 @@ class caixa_texto(QLineEdit):
             #ctrl + s
             elif event.key() == Qt.Key_S:
                 self.calcular()
-                with open('historico.txt', 'r',encoding="utf-8") as historico:
+                with open('historico.his', 'r',encoding="utf-8") as historico:
                     linhas = historico.readlines()
                     ultima_linha = linhas[-1]
-                    with open("resultado.txt","a",encoding="utf-8") as resultado:
+                    with open("resultado.his","a",encoding="utf-8") as resultado:
                         resultado.write(ultima_linha)
                     
             #ctrl + v    
@@ -216,7 +216,7 @@ class caixa_texto(QLineEdit):
                 resultado=f"{sinal}{separador.formatar_leitura(str(resultado))}"
 
                 #salva no historico
-                with open("historico.txt","a",encoding="utf-8") as h:
+                with open("historico.his","a",encoding="utf-8") as h:
                     h.write(f'{self.text()} = {resultado}\n')
         
         self.__limpar=True#proxima tecla precionada limpa o texto

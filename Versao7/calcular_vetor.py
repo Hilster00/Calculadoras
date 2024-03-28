@@ -218,3 +218,6 @@ if __name__=="__main__":
     print(calcular([9,"*","-",9]))
     print(calcular([9,"*","-",9,"/","+",9]))
     print(calcular([6,"/",2,[2,"+",1]]))
+    print(calcular([.6,"+",1]))
+    print(calcular(["sen'",[0.5]]))
+    

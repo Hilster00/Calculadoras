@@ -96,3 +96,4 @@ if __name__=="__main__":
     print(conversor("1+9%"))
     print(conversor("9+9*(9*9%)"))
     print(conversor("6/2(2+1)"))
+    print(conversor(",9+1"))
