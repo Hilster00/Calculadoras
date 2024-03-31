@@ -57,23 +57,35 @@ class Calculadora(QMainWindow):
         historico = main_menu.addMenu("Hist")
 
         #alternar entre os modos da calculadora
-        calculadora_especial = QAction('Calculadora Especial', self)
-        calculadora_especial.setShortcut('Ctrl+E')
-        calculadora_especial.triggered.connect(lambda : self.calculadora_especial())
-        conf.addAction(calculadora_especial)
+        calculadora_especial1 = QAction('Calculadora Especial', self)
+        calculadora_especial2 = QAction('Calculadora Especial', self)
+        calculadora_especial1.setShortcut('Ctrl+E')
+        calculadora_especial2.setShortcut('F5')
+        calculadora_especial1.triggered.connect(lambda : self.calculadora_especial())
+        calculadora_especial2.triggered.connect(lambda : self.calculadora_especial())
+        conf.addAction(calculadora_especial1)        
+        self.addAction(calculadora_especial2)
 
         #ver historico
-        ver_historico= QAction("Historico", self)
-        ver_historico.setShortcut('Ctrl+H')
-        ver_historico.triggered.connect(lambda: self.historico())
-        historico.addAction(ver_historico)
-
+        ver_historico1= QAction("Historico", self)
+        ver_historico2= QAction("Historico", self)
+        ver_historico1.setShortcut('Ctrl+H')
+        ver_historico2.setShortcut('F11')
+        ver_historico1.triggered.connect(lambda: self.historico())
+        historico.addAction(ver_historico1)
+        ver_historico2.triggered.connect(lambda: self.historico())
+        self.addAction(ver_historico2)
+        
         #limpar historico
-        limpar_historico = QAction("Limpar Historico", self)
-        limpar_historico.setShortcut("Ctrl+Shift+L")
-        limpar_historico.triggered.connect(lambda: self.limpar_historico())
-        historico.addAction(limpar_historico)
-
+        limpar_historico1 = QAction("Limpar Historico", self)
+        limpar_historico2 = QAction("Limpar Historico", self)
+        limpar_historico1.setShortcut("Ctrl+Shift+L")
+        limpar_historico2.setShortcut("F12")
+        limpar_historico1.triggered.connect(lambda: self.limpar_historico())
+        limpar_historico2.triggered.connect(lambda: self.limpar_historico())
+        historico.addAction(limpar_historico1)
+        self.addAction(limpar_historico2)
+        
         #atalho de fechar janela
         exit_action = QAction('Exit', self)
         exit_action.setShortcut('Ctrl+Q')
