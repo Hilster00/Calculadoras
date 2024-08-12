@@ -1,4 +1,5 @@
 ﻿import sys
+import os
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QMainWindow, QAction, QPlainTextEdit
@@ -37,7 +38,12 @@ class Calculadora(QMainWindow):
         super().__init__(parent)
         self.setWindowTitle("Calculadora 7")
         self.setFixedSize(20 + q_colunas * 50, 90 + q_linhas * 50)
-        icon = QIcon("icone.ico")
+        if getattr(sys, 'frozen', False):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.dirname(__file__)
+        icone_path = os.path.join(base_path, 'assets', 'icone.ico')
+        icon = QIcon(icone_path)
         self.setWindowIcon(icon)
 
         #resultado
